@@ -2,6 +2,7 @@ import React from "react";
 import { set, useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [authUser, setAuthUser] = useAuth();
@@ -14,11 +15,11 @@ function Login() {
   const onSubmit = (data) => {
     const userInfo = {
       email: data.email,
-      password: data.password
+      password: data.password,
     };
     // console.log(userInfo);
     axios
-      .post("http://localhost:4002/user/login", userInfo)
+      .post("/api/user/login", userInfo)
       .then((response) => {
         if (response.data) {
           alert("Login successful");
@@ -98,9 +99,12 @@ function Login() {
           <div className="flex justify-between">
             <p>
               New to ChatSphere?
-              <span className="text-blue-500 underline cursor-pointer ml-1">
+              <Link
+                to="/signup"
+                className="text-blue-500 underline cursor-pointer ml-1"
+              >
                 Signup
-              </span>
+              </Link>
             </p>
             <input
               type="submit"
