@@ -5,14 +5,13 @@ const secureRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token) {
-      return res.status(401).json({ error: "No taken, authorization denied" });
+      return res.status(401).json({ error: "No token, authorization denied" });
     }
     const decoded = jwt.verify(token, process.env.JWT_TOKEN);
     if (!decoded) {
-      return res.status(401).json({ error: "Invalid token" });
+      return res.status(401).json({ error: "Invalid Token" });
     }
-
-    const user = await User.findById(decoded.userId).select("-password");
+    const user = await User.findById(decoded.userId).select("-password"); // current loggedin user
     if (!user) {
       return res.status(401).json({ error: "No user found" });
     }
@@ -20,7 +19,7 @@ const secureRoute = async (req, res, next) => {
     next();
   } catch (error) {
     console.log("Error in secureRoute: ", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
