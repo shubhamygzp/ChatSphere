@@ -40,14 +40,24 @@ const NoChatSelected = () => {
   console.log(authUser);
   return (
     <>
-      <div className="flex h-screen items-center justify-center">
-        <h1 className="text-center">
-          Welcome! to ChatSphere{" "}
-          <span className="font-semibold text-xl">{authUser.user.fullName}</span>
-          <br />
-          No chat selected, Please start conversation by selecting anyone to
-          your contacts
-        </h1>
+      <div className="relative">
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-ghost drawer-button lg:hidden absolute left-5"
+        >
+          <CiMenuFries className="text-white text-xl" />
+        </label>
+        <div className="flex h-screen items-center justify-center">
+          <h1 className="text-center">
+            Welcome{" "}
+            <span className="font-semibold text-xl">
+              {authUser.user.fullName}
+            </span>
+            <br />
+            No chat selected, please start conversation by selecting anyone to
+            your contacts
+          </h1>
+        </div>
       </div>
     </>
   );
